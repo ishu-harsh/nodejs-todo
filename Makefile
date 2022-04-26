@@ -30,13 +30,15 @@ deploy:
 add-todo:
 
 	# TODO: Adds a todo in the app. Should accept the relevant data
-	aws --endpoint-url=http://localhost:4566  lambda invoke --function-name CreateTodo   --payload '{"title":"$(TITLE)","task": "$(TASK)"}' CreateTodo.json && cat CreateTodo.json
+	aws --endpoint-url=http://localhost:4566  lambda invoke --function-name CreateTodo --payload '{"title":"$(TITLE)","task": "$(TASK)"}' CreateTodo.json
+	jq -r '.body' CreateTodo.json
 
 .PHONY: read-todo
 ## read-todo: RUN - make read-todo TODO_ID=MD6G
 read-todo:
 	# TODO: Reads a single or all todos, should accept relevant parameters
-	aws --endpoint-url=http://localhost:4566  lambda invoke --function-name ReadTodo   --payload '{"id": "$(TODO_ID)"}' ReadTodo.json && cat ReadTodo.json
+	aws --endpoint-url=http://localhost:4566  lambda invoke --function-name ReadTodo --payload '{"id": "$(TODO_ID)"}' ReadTodo.json
+	jq -r '.body' ReadTodo.json
 
 .PHONY: template-lint
 ## template-lint: static check for errors in template
@@ -52,7 +54,7 @@ link-check:
 ## test: run tests on the deployed version
 test:
 	# TODO: To run end to end tests on the application
-	aws --endpoint-url=http://localhost:4566  lambda invoke --function-name CreateTodo   --payload '{"title":"My title", "task": "finish deployment"}' CreateTodo.json
+	aws --endpoint-url=http://localhost:4566  lambda invoke --function-name CreateTodo --payload '{"title":"My title", "task": "finish deployment"}' CreateTodo.json
 	jq -r '.body' CreateTodo.json
 
 .PHONY: clean
