@@ -15,6 +15,49 @@ TODO: Add more description here
 
 TODO: Add more instructions here like installing `make`, `docker` etc and some helpful commands
 
+
+### 1. Install dependencies
+
+```
+make install-dependencies
+```
+
+### 2. Run dev environment ( localstack )
+
+```
+make run-dev
+```
+
+### 3. Deploy local aplication to localstack ( Cloud formation )
+
+```
+make deploy
+```
+
+### 4. Test Application 
+
+```
+make test
+```
+
+### 5. Add Todo
+
+```
+make add-todo TODO="Make coffie"
+```
+### 6. Read Todo
+
+```
+make read-todo TODO_ID="JCAE" # you will get id when you a add todo 
+```
+
+### 6. Clean up 
+
+```
+make clean
+```
+
+
 ## Stack and tools
 
 - Docker
@@ -34,3 +77,4 @@ TODO: Add more instructions here like installing `make`, `docker` etc and some h
 
 - [ ] Finish all the todos
 - [ ] List all the todos that are left or can be improved
+

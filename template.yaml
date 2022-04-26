@@ -1,24 +1,59 @@
-# aws cloudformation package ... should work for this
-AWSTemplateFormatVersion: "2010-09-09"
-Description: "Cloudformation template for all the resources"
+AWSTemplateFormatVersion : '2010-09-09'
+# Transform: AWS::Serverless-2016-10-31
 
 Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      # TODO: Add properties for Dynamo DB table
+      TableName: Todos
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        # - AttributeName: todo
+        #   AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 10
+        WriteCapacityUnits: 10
+
+  # CreateTodo:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     Handler: create-todo/index.handler
+  #     CodeUri: 's3://todo/app.zip'
+  #     PackageType: Zip
+      # Events:
+      #   CreateTodo:
+      #     Type: Api
+      #     Properties:
+      #       Path: /create
+      #       Method: post
+  ReadTodo:
+      Type: AWS::Lambda::Function
+      Properties:
+          FunctionName: ReadTodo
+          PackageType: Zip
+          Description: Example
+          Handler: read-todo/index.handler
+          Runtime: nodejs12.x
+          Timeout: 300
+          Code:
+              S3Bucket: 'todo'
+              S3Key: 'read-todo.zip'
+
+
 
   CreateTodo:
-    Type: AWS::Lambda::Function
-    Properties:
-      # TODO: Add properties for create todo
-
-  ReadTodo:
-    Type: AWS::Lambda::Function
-    Properties:
-      # TODO: Add properties for read todo
-
-  # TODO: Add more resources as per requirement like lambda roles
-
-Outputs:
-# TODO: Add relevant outputs here (optional)
+      Type: AWS::Lambda::Function
+      Properties:
+          FunctionName: CreateTodo
+          PackageType: Zip
+          Description: Example
+          Handler: create-todo/index.handler
+          Runtime: nodejs12.x
+          Timeout: 300
+          Code:
+              S3Bucket: 'todo'
+              S3Key: 'create-todo.zip' 
