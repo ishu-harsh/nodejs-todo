@@ -25,7 +25,7 @@ exports.handler =  async function (event, context) {
     Item: {
       "id": todoId,
       "task": todoBody.task,
-      "todo": todoBody.title
+      "title": todoBody.title
     },
     ReturnConsumedCapacity: "TOTAL"
   };
