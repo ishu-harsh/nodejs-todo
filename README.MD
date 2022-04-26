@@ -43,7 +43,7 @@ make test
 ### 5. Add Todo
 
 ```
-make add-todo TODO="Make coffie"
+make add-todo TITLE="Title for the task" TASK="Make tea" 
 ```
 ### 6. Read Todo
 

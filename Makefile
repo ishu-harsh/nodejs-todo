@@ -26,11 +26,11 @@ deploy:
 
 
 .PHONY: add-todo
-## add-todo : RUN - make add-todo TITLE="Title for the task" TODO="Make tea" 
+## add-todo : RUN - make add-todo TITLE="Title for the task" TASK="Make tea" 
 add-todo:
 
 	# TODO: Adds a todo in the app. Should accept the relevant data
-	aws --endpoint-url=http://localhost:4566  lambda invoke --function-name CreateTodo   --payload '{"title":"$(TITLE)","task": "$(TODO)"}' CreateTodo.json && cat CreateTodo.json
+	aws --endpoint-url=http://localhost:4566  lambda invoke --function-name CreateTodo   --payload '{"title":"$(TITLE)","task": "$(TASK)"}' CreateTodo.json && cat CreateTodo.json
 
 .PHONY: read-todo
 ## read-todo: RUN - make read-todo TODO_ID=MD6G
