@@ -24,7 +24,8 @@ exports.handler =  async function (event, context) {
     TableName: table,
     Item: {
       "id": todoId,
-      "todo": todoBody.todo
+      "task": todoBody.task,
+      "todo": todoBody.title
     },
     ReturnConsumedCapacity: "TOTAL"
   };
